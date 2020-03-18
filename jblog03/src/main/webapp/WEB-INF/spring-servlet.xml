@@ -70,6 +70,6 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 	<mvc:resources mapping="/upload-images/**" location="file:/upload/" />
-	 -->
+	-->
 
 </beans>

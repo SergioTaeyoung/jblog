@@ -34,7 +34,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public String category() {
+	public String category(@PathVariable("id") String id) {		
+		int total = blogService.getTotal(id);
+		System.out.println(total + " ss ");
 		return "blog/blog-admin-category";
 	}
 	

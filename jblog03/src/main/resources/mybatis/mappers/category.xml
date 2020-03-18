@@ -9,5 +9,14 @@
 		]]>
 	</insert>
 
+	<select id="total" parameterType="String"
+		resultType="integer">
+		
+				<![CDATA[
+				select count(*) 
+				from category 
+				where id = #{id }				
+				]]>
+	</select>
 	
 </mapper>

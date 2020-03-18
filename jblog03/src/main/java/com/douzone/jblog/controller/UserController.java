@@ -3,8 +3,6 @@ package com.douzone.jblog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -12,7 +10,7 @@ import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.UserVo;
-import com.douzone.security.AuthUser;
+
 
 
 

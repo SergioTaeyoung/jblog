@@ -30,4 +30,9 @@ public class BlogRepository {
 		
 	}
 
+	public int getTotal(String id) {
+		return sqlSession.selectOne("category.total", id);
+		
+	}
+
 }

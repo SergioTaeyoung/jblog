@@ -31,8 +31,9 @@ public class BlogService {
 		
 	}
 
-
-
+	public int getTotal(String id) {
+		return blogRepository.getTotal(id);		
+	}
 
 
 }
