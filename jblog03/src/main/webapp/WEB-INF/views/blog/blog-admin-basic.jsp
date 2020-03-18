@@ -28,7 +28,7 @@
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
 					<li><a href="${pageContext.request.contextPath }/${authUser.id }/category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath }/${authUser.id }/wirte">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath }/${authUser.id }/write">글작성</a></li>
 				</ul>
 				<form action="${pageContext.request.contextPath }/${authUser.id }/basicupdate" method="post">
 	 		      	<table class="admin-config">

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.BlogRepository;
+import com.douzone.jblog.repository.CategoryRepository;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 
@@ -14,6 +15,8 @@ public class BlogService {
 
 	@Autowired
 	private BlogRepository blogRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	public int join(BlogVo bVo) {
 		System.out.println(bVo.getBlogId() + bVo.getTitle() + bVo.getLogo() + "service");
@@ -29,16 +32,16 @@ public class BlogService {
 	}
 
 	public void cateInsert(CategoryVo vo) {
-		blogRepository.cateInsert(vo);
+		categoryRepository.cateInsert(vo);
 		
 	}
 
 	public int getTotal(String id) {
-		return blogRepository.getTotal(id);		
+		return categoryRepository.getTotal(id);		
 	}
 
 	public List<CategoryVo> getCategory(CategoryVo vo) {
-		return blogRepository.myCategory(vo);
+		return categoryRepository.myCategory(vo);
 		
 	}
 

@@ -27,18 +27,6 @@ public class BlogRepository {
 		return sqlSession.update("blog.basicUpdate", vo);
 	}
 
-	public int cateInsert(CategoryVo vo) {
-		return sqlSession.insert("category.insert", vo);
-		
-	}
-
-	public int getTotal(String id) {
-		return sqlSession.selectOne("category.total", id);
-		
-	}
-
-	public List<CategoryVo> myCategory(CategoryVo vo) {
-		return sqlSession.selectList("category.myList", vo);
-	}
+	
 
 }

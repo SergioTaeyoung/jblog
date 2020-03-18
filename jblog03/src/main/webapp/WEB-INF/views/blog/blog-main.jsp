@@ -53,8 +53,13 @@
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
+					<c:if test = "${empty list}">
+						<li><a href="">기타</a></li>
+					</c:if>
 				<c:forEach var="vo" varStatus="status" items="${list }">
+					
 					<li><a href="">${vo.name }</a>
+					
 				</c:forEach>
 			</ul>
 		</div>

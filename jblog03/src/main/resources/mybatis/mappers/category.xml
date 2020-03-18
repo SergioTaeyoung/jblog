@@ -22,7 +22,7 @@
 	<select id="myList" parameterType="categoryvo" resultType="categoryvo">
 		
 				<![CDATA[
-				select name, description 
+				select no, name, description 
 				from category 
 				where id = #{id };
 				]]>

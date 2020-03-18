@@ -55,9 +55,29 @@ public class BlogController {
 		return "blog/blog-admin-category";
 	}
 	
-	@RequestMapping(value = "/wirte", method = RequestMethod.GET)
-	public String write() {
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
+	public String write(@PathVariable("id") String id,
+			BlogVo vo, CategoryVo cVo, 
+			Model model) {
+		cVo.setId(id);
+		List<CategoryVo> list = blogService.getCategory(cVo);
+		
+		model.addAttribute("list", list);
+		
 		return "blog/blog-admin-write";
+	}
+	
+	@RequestMapping(value = "/postwrite", method = RequestMethod.POST)
+	public String write2(@PathVariable("id") String id,
+			@RequestParam(value="title", defaultValue="true") String title,
+			@RequestParam(value="content", defaultValue="true") String contents,
+			@RequestParam(value="category", required = true, defaultValue="") int cateNo,
+			BlogVo vo, CategoryVo cVo, 
+			Model model){
+		System.err.println(cateNo + "숫자");
+		System.err.println(title + "제목");
+		System.err.println(contents + "콘텐트");
+		return "redirect:/{id}/write";
 	}
 	
 	@RequestMapping(value = "/basicupdate", method = RequestMethod.POST)
