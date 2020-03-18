@@ -49,16 +49,22 @@ public class BlogController {
 			Model model) {
 		vo.setId(id);	
 		
-		//List<CategoryVo> list = blogService.getCategory(vo);
+		
 		List<CategoryVo> npList = blogService.numberofPost(vo);
-		System.err.println(npList);
+		
 		int total = blogService.getTotal(id);
-		//model.addAttribute("list", list);
+		
 		model.addAttribute("totalCount", total);
 		model.addAttribute("npList", npList);
 		
 		
 		return "blog/blog-admin-category";
+	}
+	
+	@RequestMapping(value = "/delete/{vo.no}")
+	public String delete(@PathVariable("vo.no") int no) {
+		blogService.categoryDelete(no);
+		return "redirect:/{id}/category";
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)

@@ -24,38 +24,40 @@ public class BlogService {
 
 	public int join(BlogVo bVo) {
 		System.out.println(bVo.getBlogId() + bVo.getTitle() + bVo.getLogo() + "service");
-		return blogRepository.insert(bVo);		
+		return blogRepository.insert(bVo);
 	}
 
 	public BlogVo getBlog(BlogVo vo) {
-		return blogRepository.myBlog(vo);		
+		return blogRepository.myBlog(vo);
 	}
 
 	public void basicUpdate(BlogVo vo) {
-		blogRepository.basicUpdate(vo);		
+		blogRepository.basicUpdate(vo);
 	}
 
 	public void cateInsert(CategoryVo vo) {
-		categoryRepository.cateInsert(vo);		
+		categoryRepository.cateInsert(vo);
 	}
 
 	public int getTotal(String id) {
-		return categoryRepository.getTotal(id);		
+		return categoryRepository.getTotal(id);
 	}
 
 	public List<CategoryVo> getCategory(CategoryVo vo) {
-		return categoryRepository.myCategory(vo);		
+		return categoryRepository.myCategory(vo);
 	}
 
 	public int addPost(PostVo pVo) {
 		return postRepository.addPost(pVo);
 	}
-	
+
 	public List<CategoryVo> numberofPost(CategoryVo vo) {
 		return categoryRepository.getNumberOfPost(vo);
 	}
 
-
-
+	public void categoryDelete(int no) {
+		categoryRepository.categoryDelete(no);
+		
+	}
 
 }

@@ -32,4 +32,8 @@ public class CategoryRepository {
 		return sqlSession.selectList("category.getNP", vo);
 	}
 
+	public int categoryDelete(int no) {
+		return sqlSession.delete("category.delete", no);
+	}
+
 }

@@ -36,7 +36,7 @@
 		      			<th>카테고리명</th>
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
-		      			<th>삭제==${totalNP }==</th>      			
+		      			<th>삭제</th>      			
 		      		</tr>				
 					
 					<c:set var='listcount' value = '${totalCount }'></c:set>
@@ -48,7 +48,10 @@
 						<td>${vo.name }</td>
 						<td>${vo.numberOfPost }</td>
 						<td>${vo.description }</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>						
+						<td>												
+							<a href="${pageContext.request.contextPath }/${authUser.id}/delete/${vo.no}" class="del">
+							<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">	</a>
+						</td>						
 					</tr>					
 					</c:forEach>
 					

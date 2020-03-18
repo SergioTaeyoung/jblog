@@ -38,4 +38,11 @@
 				]]>
 	</select> 
 	
+	<delete id="delete" parameterType="integer">
+		<![CDATA[
+		delete from category 		
+		where no = #{no }   		
+		]]>
+	</delete>
+	
 </mapper>
