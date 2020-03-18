@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 
 @Controller
 @RequestMapping("/{id}")
@@ -58,6 +59,19 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}
 	
+	@RequestMapping(value = "/cateupdate", method = RequestMethod.POST)
+	public String cateUpdate(@PathVariable("id") String id,
+			@RequestParam(value="name", defaultValue="true") String name,
+			@RequestParam(value="desc", defaultValue="true") String description,	
+			CategoryVo vo) {
+		
+		vo.setName(name);
+		vo.setDescription(description);
+		vo.setId(id);
+		
+		blogService.cateInsert(vo);
+		return "blog/blog-admin-category";
+	}
 
 
 }

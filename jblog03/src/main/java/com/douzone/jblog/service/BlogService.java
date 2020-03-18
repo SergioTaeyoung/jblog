@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 
 @Service
 public class BlogService {
@@ -23,6 +24,11 @@ public class BlogService {
 
 	public void basicUpdate(BlogVo vo) {
 		blogRepository.basicUpdate(vo);		
+	}
+
+	public void cateInsert(CategoryVo vo) {
+		blogRepository.cateInsert(vo);
+		
 	}
 
 

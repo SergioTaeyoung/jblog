@@ -3,9 +3,9 @@ package com.douzone.jblog.vo;
 public class CategoryVo {
 	private int no;
 	private String name;
-	private String text;
+	private String description;
 	private String dateTime;
-	private String blogId;
+	private String id;
 	public int getNo() {
 		return no;
 	}
@@ -18,11 +18,11 @@ public class CategoryVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getText() {
-		return text;
+	public String getDescription() {
+		return description;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getDateTime() {
 		return dateTime;
@@ -30,17 +30,18 @@ public class CategoryVo {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	public String getBlogId() {
-		return blogId;
+	public String getId() {
+		return id;
 	}
-	public void setBlogId(String blogId) {
-		this.blogId = blogId;
+	public void setId(String id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {
-		return "CategoryVo [no=" + no + ", name=" + name + ", text=" + text + ", dateTime=" + dateTime + ", blogId="
-				+ blogId + "]";
+		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", dateTime=" + dateTime
+				+ ", id=" + id + "]";
 	}
 	
+
 	
 }

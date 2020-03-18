@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 
 @Repository
 public class BlogRepository {
@@ -22,6 +23,11 @@ public class BlogRepository {
 
 	public int basicUpdate(BlogVo vo) {
 		return sqlSession.update("blog.basicUpdate", vo);
+	}
+
+	public int cateInsert(CategoryVo vo) {
+		return sqlSession.insert("category.insert", vo);
+		
 	}
 
 }
