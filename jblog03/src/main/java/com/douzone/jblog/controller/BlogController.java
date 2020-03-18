@@ -23,9 +23,16 @@ public class BlogController {
 	
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String blog(@PathVariable("id") String id, BlogVo vo, Model model) {
+	public String blog(@PathVariable("id") String id,
+			BlogVo vo, CategoryVo cVo, 
+			Model model) {
 		vo.setBlogId(id);
+		cVo.setId(id);
+		
 		vo = blogService.getBlog(vo);
+		List<CategoryVo> list = blogService.getCategory(cVo);
+		
+		model.addAttribute("list", list);
 		model.addAttribute("title", vo.getTitle());
 		model.addAttribute("logo", vo.getLogo());		
 		return "blog/blog-main";
@@ -41,7 +48,7 @@ public class BlogController {
 			Model model) {
 		vo.setId(id);
 		List<CategoryVo> list = blogService.getCategory(vo);
-		System.out.println(list + "-----------------------------------------");
+		
 		int total = blogService.getTotal(id);
 		model.addAttribute("totalCount", total);
 		model.addAttribute("list", list);
