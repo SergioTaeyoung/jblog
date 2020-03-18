@@ -17,6 +17,10 @@ public class BlogService {
 		return blogRepository.insert(bVo);		
 	}
 
+	public BlogVo getBlog(BlogVo vo) {
+		return blogRepository.myBlog(vo);		
+	}
+
 
 
 }

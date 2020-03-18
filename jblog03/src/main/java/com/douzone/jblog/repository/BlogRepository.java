@@ -17,4 +17,8 @@ public class BlogRepository {
 		return sqlSession.insert("blog.insert", bVo);
 	}
 
+	public BlogVo myBlog(BlogVo vo) {		
+		return sqlSession.selectOne("blog.myBlog", vo);
+	}
+
 }
