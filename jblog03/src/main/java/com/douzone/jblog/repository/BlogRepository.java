@@ -12,13 +12,16 @@ public class BlogRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int insert(BlogVo bVo) {
-		System.out.println(bVo.getBlogId() + bVo.getTitle() + bVo.getLogo() +"repository");
+	public int insert(BlogVo bVo) {		
 		return sqlSession.insert("blog.insert", bVo);
 	}
 
 	public BlogVo myBlog(BlogVo vo) {		
 		return sqlSession.selectOne("blog.myBlog", vo);
+	}
+
+	public int basicUpdate(BlogVo vo) {
+		return sqlSession.update("blog.basicUpdate", vo);
 	}
 
 }

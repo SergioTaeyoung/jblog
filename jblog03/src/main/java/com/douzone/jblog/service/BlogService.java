@@ -21,6 +21,12 @@ public class BlogService {
 		return blogRepository.myBlog(vo);		
 	}
 
+	public void basicUpdate(BlogVo vo) {
+		blogRepository.basicUpdate(vo);		
+	}
+
+
+
 
 
 }
