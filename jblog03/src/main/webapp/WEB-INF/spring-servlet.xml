@@ -11,19 +11,27 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<mvc:annotation-driven/>
-	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 <!-- 		<mvc:argument-resolvers> -->
 <!-- 			<bean -->
 <!-- 				class="com.douzone.security.AuthUserHandlerMethodArgumentResolver" /> -->
 <!-- 		</mvc:argument-resolvers> -->
-
+	<mvc:annotation-driven />
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
 
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />
+			<bean class="com.douzone.security.LoginInterceptor" />
+		</mvc:interceptor>
 
-
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.douzone.security.LogoutInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- 
 		<mvc:interceptor>
@@ -40,7 +48,9 @@
 		base-package="com.douzone.jblog.controller" />
 <!-- 		base-package="com.douzone.jblog.controller, com.douzone.jblog.exception" /> -->
 
-
+	<!-- mvc resources -->
+	<mvc:resources mapping="/images/**"
+		location="file:/jblog-uploads/" />
 
 	<!-- ViewResolver 설정 -->
 	<bean id="viewResolver"
