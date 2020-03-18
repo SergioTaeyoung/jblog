@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
+import com.douzone.jblog.vo.PostVo;
 
 @Controller
 @RequestMapping("/{id}")
@@ -72,11 +73,15 @@ public class BlogController {
 			@RequestParam(value="title", defaultValue="true") String title,
 			@RequestParam(value="content", defaultValue="true") String contents,
 			@RequestParam(value="category", required = true, defaultValue="") int cateNo,
-			BlogVo vo, CategoryVo cVo, 
+			CategoryVo cVo, PostVo pVo, 
 			Model model){
-		System.err.println(cateNo + "숫자");
-		System.err.println(title + "제목");
-		System.err.println(contents + "콘텐트");
+		
+		pVo.setTitle(title);
+		pVo.setContents(contents);
+		pVo.setCategoryNo(cateNo);
+		
+		blogService.addPost(pVo);
+
 		return "redirect:/{id}/write";
 	}
 	

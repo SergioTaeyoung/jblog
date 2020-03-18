@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.repository.CategoryRepository;
+import com.douzone.jblog.repository.PostRepository;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
+import com.douzone.jblog.vo.PostVo;
 
 @Service
 public class BlogService {
@@ -17,6 +19,8 @@ public class BlogService {
 	private BlogRepository blogRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private PostRepository postRepository;
 
 	public int join(BlogVo bVo) {
 		System.out.println(bVo.getBlogId() + bVo.getTitle() + bVo.getLogo() + "service");
@@ -44,6 +48,12 @@ public class BlogService {
 		return categoryRepository.myCategory(vo);
 		
 	}
+
+	public int addPost(PostVo pVo) {
+		return postRepository.addPost(pVo);
+	}
+
+
 
 
 }
