@@ -1,13 +1,12 @@
 package com.douzone.jblog.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
@@ -46,11 +45,10 @@ public class BlogController {
 	@RequestMapping(value = "/basicupdate", method = RequestMethod.POST)
 	public String basicUpdate(
 			@PathVariable("id") String id,
-			HttpServletRequest httpServletRequest,			
-			BlogVo vo) {
+			@RequestParam(value="title", defaultValue="true") String title,
+			@RequestParam(value="logo-file", defaultValue="true") String logo,	
+			BlogVo vo) {				
 		
-		String title = httpServletRequest.getParameter("title");		
-		String logo = httpServletRequest.getParameter("logo-file");
 		vo.setTitle(title);
 		vo.setLogo(logo);
 		vo.setBlogId(id);
@@ -59,5 +57,7 @@ public class BlogController {
 		
 		return "blog/blog-admin-basic";
 	}
+	
+
 
 }
