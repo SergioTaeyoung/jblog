@@ -49,9 +49,8 @@ public class BlogController {
 			HttpServletRequest httpServletRequest,			
 			BlogVo vo) {
 		
-		String title = httpServletRequest.getParameter("title");
-		System.out.println(title + " : title ");
-		String logo = httpServletRequest.getParameter("logo");
+		String title = httpServletRequest.getParameter("title");		
+		String logo = httpServletRequest.getParameter("logo-file");
 		vo.setTitle(title);
 		vo.setLogo(logo);
 		vo.setBlogId(id);
