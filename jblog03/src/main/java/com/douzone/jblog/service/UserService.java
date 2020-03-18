@@ -12,7 +12,7 @@ import com.douzone.jblog.vo.UserVo;
 public class UserService {
 
 	@Autowired
-	private UserRepository userRepository;	
+	private UserRepository userRepository;
 	
 	public int join(UserVo vo) {
 		return userRepository.insert(vo);
@@ -21,6 +21,8 @@ public class UserService {
 	public UserVo getUser(UserVo vo) {
 		return userRepository.findByEmailAndPassword(vo);
 	}
+	
+	
 
 
 
