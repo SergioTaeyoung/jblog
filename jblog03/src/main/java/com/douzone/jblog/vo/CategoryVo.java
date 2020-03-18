@@ -6,6 +6,14 @@ public class CategoryVo {
 	private String description;
 	private String dateTime;
 	private String id;
+	private int numberOfPost;
+	
+	public int getNumberOfPost() {
+		return numberOfPost;
+	}
+	public void setNumberOfPost(int numberOfPost) {
+		this.numberOfPost = numberOfPost;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -39,9 +47,9 @@ public class CategoryVo {
 	@Override
 	public String toString() {
 		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", dateTime=" + dateTime
-				+ ", id=" + id + "]";
+				+ ", id=" + id + ", numberOfPost=" + numberOfPost + "]";
 	}
-	
+
 
 	
 }

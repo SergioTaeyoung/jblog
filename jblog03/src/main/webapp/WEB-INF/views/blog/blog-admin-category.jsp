@@ -36,17 +36,17 @@
 		      			<th>카테고리명</th>
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
-		      			<th>삭제</th>      			
+		      			<th>삭제==${totalNP }==</th>      			
 		      		</tr>				
 					
 					<c:set var='listcount' value = '${totalCount }'></c:set>
-					<c:forEach var="vo" varStatus="status" items="${list }">
+					<c:forEach var="vo" varStatus="status" items="${npList }">
 					
 					<tr>
 						<%-- <td>${listcount }</td> --%>
 						<td>${listcount-status.index }</td>
 						<td>${vo.name }</td>
-						<td>총개수</td>
+						<td>${vo.numberOfPost }</td>
 						<td>${vo.description }</td>
 						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>						
 					</tr>					

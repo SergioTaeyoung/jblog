@@ -43,7 +43,7 @@
 							<td><input type="text" size="60" name="title"> 
 							<select name="category">
 									<c:forEach var="vo" varStatus="status" items="${list }">
-										<option value = '${vo.no }'>===${vo.no}---${vo.name }</option>
+										<option value = '${vo.no }'>${vo.name }</option>
 									</c:forEach>									
 							</select></td>
 						</tr>

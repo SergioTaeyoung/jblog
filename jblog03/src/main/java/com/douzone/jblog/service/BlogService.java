@@ -36,8 +36,7 @@ public class BlogService {
 	}
 
 	public void cateInsert(CategoryVo vo) {
-		categoryRepository.cateInsert(vo);
-		
+		categoryRepository.cateInsert(vo);		
 	}
 
 	public int getTotal(String id) {
@@ -45,12 +44,15 @@ public class BlogService {
 	}
 
 	public List<CategoryVo> getCategory(CategoryVo vo) {
-		return categoryRepository.myCategory(vo);
-		
+		return categoryRepository.myCategory(vo);		
 	}
 
 	public int addPost(PostVo pVo) {
 		return postRepository.addPost(pVo);
+	}
+	
+	public List<CategoryVo> numberofPost(CategoryVo vo) {
+		return categoryRepository.getNumberOfPost(vo);
 	}
 
 

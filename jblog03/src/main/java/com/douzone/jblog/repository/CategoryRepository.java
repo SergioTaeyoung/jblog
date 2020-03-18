@@ -28,4 +28,8 @@ public class CategoryRepository {
 		return sqlSession.selectList("category.myList", vo);
 	}
 
+	public List<CategoryVo> getNumberOfPost(CategoryVo vo) {
+		return sqlSession.selectList("category.getNP", vo);
+	}
+
 }

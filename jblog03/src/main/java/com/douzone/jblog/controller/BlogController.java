@@ -44,15 +44,20 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public String category(@PathVariable("id") String id, 
+	public String category(@PathVariable("id") String id,			
 			CategoryVo vo, 
 			Model model) {
-		vo.setId(id);
-		List<CategoryVo> list = blogService.getCategory(vo);
+		vo.setId(id);	
 		
+		//List<CategoryVo> list = blogService.getCategory(vo);
+		List<CategoryVo> npList = blogService.numberofPost(vo);
+		System.err.println(npList);
 		int total = blogService.getTotal(id);
+		//model.addAttribute("list", list);
 		model.addAttribute("totalCount", total);
-		model.addAttribute("list", list);
+		model.addAttribute("npList", npList);
+		
+		
 		return "blog/blog-admin-category";
 	}
 	
