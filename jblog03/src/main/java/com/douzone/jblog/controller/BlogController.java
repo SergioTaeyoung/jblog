@@ -1,5 +1,7 @@
 package com.douzone.jblog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,9 +36,15 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public String category(@PathVariable("id") String id) {		
+	public String category(@PathVariable("id") String id, 
+			CategoryVo vo, 
+			Model model) {
+		vo.setId(id);
+		List<CategoryVo> list = blogService.getCategory(vo);
+		System.out.println(list + "-----------------------------------------");
 		int total = blogService.getTotal(id);
-		System.out.println(total + " ss ");
+		model.addAttribute("totalCount", total);
+		model.addAttribute("list", list);
 		return "blog/blog-admin-category";
 	}
 	
@@ -72,7 +80,7 @@ public class BlogController {
 		vo.setId(id);
 		
 		blogService.cateInsert(vo);
-		return "blog/blog-admin-category";
+		return "redirect:/{id}/category";
 	}
 
 

@@ -1,5 +1,7 @@
 package com.douzone.jblog.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,11 @@ public class BlogService {
 
 	public int getTotal(String id) {
 		return blogRepository.getTotal(id);		
+	}
+
+	public List<CategoryVo> getCategory(CategoryVo vo) {
+		return blogRepository.myCategory(vo);
+		
 	}
 
 

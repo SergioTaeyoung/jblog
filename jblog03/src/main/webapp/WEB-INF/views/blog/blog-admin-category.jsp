@@ -37,30 +37,22 @@
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
-		      		</tr>
+		      		</tr>				
+					
+					<c:set var='listcount' value = '${totalCount }'></c:set>
+					<c:forEach var="vo" varStatus="status" items="${list }">
+					
 					<tr>
-						<td>3</td>
-						<td>미분류</td>
-						<td>10</td>
-						<td>카테고리를 지정하지 않은 경우</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>  
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
-				</table>
-      			
+						<%-- <td>${listcount }</td> --%>
+						<td>${listcount-status.index }</td>
+						<td>${vo.name }</td>
+						<td>총개수</td>
+						<td>${vo.description }</td>
+						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>						
+					</tr>					
+					</c:forEach>
+					
+      			</table>
       			<form action="${pageContext.request.contextPath }/${authUser.id }/cateupdate" method="post">
       				<h4 class="n-c">새로운 카테고리 추가</h4>
 		      		<table id="admin-cat-add">
