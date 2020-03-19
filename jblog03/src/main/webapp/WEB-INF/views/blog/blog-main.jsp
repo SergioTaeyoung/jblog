@@ -52,21 +52,19 @@
 
 		<div id="navigation">
 			<h2>카테고리</h2>
-			<ul>
+				<ul>
 					<c:if test = "${empty list}">
 						<li><a href="">기타</a></li>
 					</c:if>
-				<c:forEach var="vo" varStatus="status" items="${list }">
-					
-					<li><a href="">${vo.name }</a>
-					
-				</c:forEach>
-			</ul>
+					<c:forEach var="vo" varStatus="status" items="${list }">					
+						<li><a href="">${vo.name }</a>					
+					</c:forEach>
+				</ul>
 		</div>
 		
 		<div id="footer">
 			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
+				<strong>${title}</strong> is powered by JBlog (c)2016
 			</p>
 		</div>
 	</div>

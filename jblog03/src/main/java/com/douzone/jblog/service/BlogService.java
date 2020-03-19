@@ -22,8 +22,7 @@ public class BlogService {
 	@Autowired
 	private PostRepository postRepository;
 
-	public int join(BlogVo bVo) {
-		System.out.println(bVo.getBlogId() + bVo.getTitle() + bVo.getLogo() + "service");
+	public int join(BlogVo bVo) {		
 		return blogRepository.insert(bVo);
 	}
 
@@ -33,6 +32,10 @@ public class BlogService {
 
 	public void basicUpdate(BlogVo vo) {
 		blogRepository.basicUpdate(vo);
+	}
+	
+	public void defaultCategory(CategoryVo vo) {
+		categoryRepository.defaultCategory(vo);
 	}
 
 	public void cateInsert(CategoryVo vo) {
@@ -56,8 +59,9 @@ public class BlogService {
 	}
 
 	public void categoryDelete(int no) {
-		categoryRepository.categoryDelete(no);
-		
+		categoryRepository.categoryDelete(no);		
 	}
+	
+	
 
 }

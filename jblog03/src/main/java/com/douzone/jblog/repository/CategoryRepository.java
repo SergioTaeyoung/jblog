@@ -14,9 +14,12 @@ public class CategoryRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public int defaultCategory(CategoryVo vo) {
+		return sqlSession.insert("category.default", vo);		
+	}
+
 	public int cateInsert(CategoryVo vo) {
-		return sqlSession.insert("category.insert", vo);
-		
+		return sqlSession.insert("category.insert", vo);		
 	}
 
 	public int getTotal(String id) {

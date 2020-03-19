@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.UserVo;
 
 
@@ -31,16 +32,17 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(UserVo vo) {
+	public String join(UserVo vo, CategoryVo cVo) {
 		userService.join(vo);
 		
 		BlogVo bVo = new BlogVo();
 		bVo.setBlogId(vo.getId());
+		cVo.setId(vo.getId());
 		bVo.setTitle("title을 입력해주세요.");
-		bVo.setLogo("1234.PNG");
-		
-		System.out.println(bVo.getBlogId() + bVo.getTitle() + bVo.getLogo() );
+		bVo.setLogo("1234.PNG");		
 		blogService.join(bVo);
+		blogService.defaultCategory(cVo);
+		
 		return "redirect:/user/joinsuccess";
 	}
 	
