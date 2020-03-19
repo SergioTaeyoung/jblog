@@ -63,8 +63,8 @@ public class BlogController {
 		    	  categoryNo = pathNo1.get();
 		    	  model.addAttribute("caNo",categoryNo);
 		    	  
-		    	  
-		    	  pVo.setNo(postNo);
+		    	  Long cateNo = blogService.getMinNo(categoryNo);
+		    	  pVo.setNo(cateNo);
 		  		  pVo = blogService.getPost(pVo);
 		  		  model.addAttribute("post", pVo);
 		  		  

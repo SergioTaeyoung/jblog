@@ -30,7 +30,7 @@
 				]]>
 	</select>
 
-	<select id="MinNo" parameterType="Long" resultType="postvo">
+	<select id="MinNo" parameterType="Long" resultType="Long">
 		
 				<![CDATA[
 				select min(no)

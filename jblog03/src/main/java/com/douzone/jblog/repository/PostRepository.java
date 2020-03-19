@@ -26,7 +26,7 @@ public class PostRepository {
 		return sqlSession.selectOne("post.post", vo);
 	}
 	
-	public PostVo getMinNo(Long cateNo) {
+	public Long getMinNo(Long cateNo) {
 		return sqlSession.selectOne("post.MinNo", cateNo);
 	}
 

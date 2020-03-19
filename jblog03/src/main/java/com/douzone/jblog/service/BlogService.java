@@ -74,7 +74,7 @@ public class BlogService {
 		return postRepository.getPost(vo);		
 	}
 	
-	public PostVo getMinNo(Long cateNo) {
+	public Long getMinNo(Long cateNo) {
 		return postRepository.getMinNo(cateNo);
 	}
 	

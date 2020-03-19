@@ -26,10 +26,15 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
+					<c:if test="${empty post.title}"> 
+						<h4>포스트가 존재하지 않습니다.</h4>
+					</c:if>
+					<c:if test="${not empty post.title }">
 					<h4>${post.title }</h4>
-					<p>
-						${post.contents }
-					<p>
+						<p>
+							${post.contents }
+						<p>
+					</c:if>
 				</div>
 				
 				<ul class="blog-list">				
