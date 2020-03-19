@@ -29,8 +29,9 @@ public class BlogController {
 		
 		//첫번째로 만들어진 카테고리 번호
 		int firstCategoryNo = blogService.getFirstCategoryNo(id);
+		//첫번째 포스트 리스트
 		List<PostVo> pList = blogService.getPostList(firstCategoryNo);
-		System.err.println(pList);
+		model.addAttribute("pList", pList);
 
 		vo = blogService.getBlog(vo);
 		List<CategoryVo> list = blogService.getCategory(cVo);
