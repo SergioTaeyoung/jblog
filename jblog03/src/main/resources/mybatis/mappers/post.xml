@@ -9,5 +9,14 @@
 		]]>
 	</insert>
 
+	<select id="list" parameterType="integer" resultType="postvo">
+		
+				<![CDATA[
+				select no, title, contents, 
+				reg_date as 'dateTime', category_no as 'categoryNo' 
+				from post 
+				where category_no = #{firstCategoryNo };
+				]]>
+	</select>
 	
 </mapper>

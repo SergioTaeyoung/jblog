@@ -1,5 +1,7 @@
 package com.douzone.jblog.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,10 @@ public class PostRepository {
 	
 	public int addPost(PostVo pVo) {		
 		return sqlSession.insert("post.add", pVo);
+	}
+
+	public List<PostVo> getPostList(int firstCategoryNo) {
+		return sqlSession.selectList("post.list", firstCategoryNo);
 	}
 
 }

@@ -66,6 +66,10 @@ public class BlogService {
 		return categoryRepository.getFirstCategoryNo(id);		
 	}
 
+	public List<PostVo> getPostList(int firstCategoryNo) {
+		return postRepository.getPostList(firstCategoryNo);
+	}
+
 
 	
 	
