@@ -30,19 +30,19 @@
 					<li><a href="${pageContext.request.contextPath }/${authUser.id }/category">카테고리</a></li>
 					<li><a href="${pageContext.request.contextPath }/${authUser.id }/write">글작성</a></li>
 				</ul>
-				<form action="${pageContext.request.contextPath }/${authUser.id }/basicupdate" method="post">
+				<form action="${pageContext.request.contextPath }/${authUser.id }/basicupdate" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
-			      			<td><input type="text" size="40" name="title"></td>
+			      			<td><input type="text" size="40" name="title" value = ${blogVo.title }></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>      			
+			      			<td><img src="${pageContext.request.contextPath}${blogVo.logo}"></td>      			
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
-			      			<td><input type="text" name="logo-file"></td>      			
+			      			<td><input type="file" name="logo-file"></td>      			
 			      		</tr>           		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>

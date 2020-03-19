@@ -63,13 +63,11 @@
 	</bean>
 
 	<!-- 멀티파트 리졸버 -->
-	<!-- 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="52428800" />
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
-	<mvc:resources mapping="/upload-images/**" location="file:/upload/" />
-	-->
+	<mvc:resources mapping="/assets/upload-images/**" location="file:/uploads/" />
 
 </beans>

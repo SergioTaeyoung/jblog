@@ -12,7 +12,8 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${blogVo.title} == ${blogVo.blogId }</h1>
+		<a href="${pageContext.request.contextPath }/${blogVo.blogId}">
+			<h1> ${blogVo.title} </h1></a>
 			<ul>
 				<c:if test="${empty authUser }">
 				<li><a href="${pageContext.request.contextPath }/user/login">로그인</a></li>
@@ -49,7 +50,7 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+				<img src="${pageContext.request.contextPath}${blogVo.logo}">
 			</div>
 		</div>
 

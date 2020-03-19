@@ -6,12 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.jblog.service.BlogService;
+import com.douzone.jblog.service.FileUploadService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
@@ -22,7 +25,9 @@ public class BlogController {
 
 	@Autowired
 	private BlogService blogService;
-
+	@Autowired
+	private FileUploadService fileUploadService;
+	
 	// /id/categoryNo/postNo
 	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
 	public String blog(@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model, PostVo pVo,
@@ -102,7 +107,14 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin() {
+	public String admin(
+			@PathVariable("id") String id, 
+			BlogVo vo,
+			Model model) {
+		System.err.println("id==="+id);
+		vo.setBlogId(id);
+		BlogVo blogVo = blogService.getBlog(vo);
+		model.addAttribute("blogVo", blogVo);
 		return "blog/blog-admin-basic";
 	}
 
@@ -155,22 +167,22 @@ public class BlogController {
 
 	@RequestMapping(value = "/basicupdate", method = RequestMethod.POST)
 	public String basicUpdate(@PathVariable("id") String id,
-			@RequestParam(value = "title", defaultValue = "true") String title,
-			@RequestParam(value = "logo-file", defaultValue = "true") String logo, BlogVo vo) {
+			@ModelAttribute BlogVo vo,
+			@RequestParam("logo-file") MultipartFile multipartFile) {
 
-		vo.setTitle(title);
-		vo.setLogo(logo);
+		String url = fileUploadService.restore(multipartFile);
+		
 		vo.setBlogId(id);
-
+		vo.setLogo(url);
 		blogService.basicUpdate(vo);
 
-		return "blog/blog-admin-basic";
+		return "redirect:/{id}";
 	}
 
 	@RequestMapping(value = "/cateupdate", method = RequestMethod.POST)
 	public String cateUpdate(@PathVariable("id") String id,
-			@RequestParam(value = "name", defaultValue = "true") String name,
-			@RequestParam(value = "desc", defaultValue = "true") String description, CategoryVo vo) {
+			@RequestParam(value = "name", required = true , defaultValue = "") String name,
+			@RequestParam(value = "desc",required = true , defaultValue = "") String description, CategoryVo vo) {
 		if ("기타".equals(name)) {
 			return "redirect:/{id}/category";
 		} else {
