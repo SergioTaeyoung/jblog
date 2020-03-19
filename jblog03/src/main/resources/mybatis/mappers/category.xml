@@ -54,7 +54,7 @@
 	</delete>
 	
 	<select id="firstCN" parameterType="String"
-		resultType="integer">
+		resultType="Long">
 		
 				<![CDATA[
 				select min(no)as 'first_category' 

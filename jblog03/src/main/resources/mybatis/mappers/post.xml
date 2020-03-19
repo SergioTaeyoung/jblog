@@ -30,4 +30,13 @@
 				]]>
 	</select>
 
+	<select id="MinNo" parameterType="Long" resultType="postvo">
+		
+				<![CDATA[
+				select min(no)
+				from post
+				where category_no = #{cateNo};
+				]]>
+	</select>
+
 </mapper>

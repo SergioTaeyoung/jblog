@@ -18,12 +18,16 @@ public class PostRepository {
 		return sqlSession.insert("post.add", pVo);
 	}
 
-	public List<PostVo> getPostList(int firstCategoryNo) {
+	public List<PostVo> getPostList(Long firstCategoryNo) {
 		return sqlSession.selectList("post.list", firstCategoryNo);
 	}
 
 	public PostVo getPost(PostVo vo) {
 		return sqlSession.selectOne("post.post", vo);
+	}
+	
+	public PostVo getMinNo(Long cateNo) {
+		return sqlSession.selectOne("post.MinNo", cateNo);
 	}
 
 }

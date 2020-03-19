@@ -62,17 +62,22 @@ public class BlogService {
 		categoryRepository.categoryDelete(no);		
 	}
 
-	public int getFirstCategoryNo(String id) {
+	public Long getFirstCategoryNo(String id) {
 		return categoryRepository.getFirstCategoryNo(id);		
 	}
 
-	public List<PostVo> getPostList(int firstCategoryNo) {
+	public List<PostVo> getPostList(Long firstCategoryNo) {
 		return postRepository.getPostList(firstCategoryNo);
 	}
 
 	public PostVo getPost(PostVo vo) {
 		return postRepository.getPost(vo);		
 	}
+	
+	public PostVo getMinNo(Long cateNo) {
+		return postRepository.getMinNo(cateNo);
+	}
+	
 
 
 	

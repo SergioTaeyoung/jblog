@@ -34,7 +34,7 @@
 				
 				<ul class="blog-list">				
 					<c:forEach var="vo" varStatus="status" items="${pList }">
-						<li><a href="${pageContext.request.contextPath}/${authUser.id }/${vo.no}">${vo.title }</a> <span>${vo.dateTime }</span> </li>					
+						<li><a href="${pageContext.request.contextPath}/${authUser.id }/${caNo}/${vo.no}">${vo.title }</a> <span>${vo.dateTime }</span> </li>					
 					</c:forEach>
 					
 				</ul>
@@ -55,7 +55,9 @@
 						<li><a href="">기타</a></li>
 					</c:if>
 					<c:forEach var="vo" varStatus="status" items="${list }">					
-						<li><a href="">${vo.name }</a>					
+						<li>
+							<a href="${pageContext.request.contextPath}/${authUser.id }/${vo.no}">${vo.name }</a>							
+						</li>					
 					</c:forEach>
 				</ul>
 		</div>
