@@ -42,6 +42,7 @@ public class UserController {
 		bVo.setLogo("1234.PNG");		
 		blogService.join(bVo);
 		blogService.defaultCategory(cVo);
+		blogService.basicUpdate(bVo);
 		
 		return "redirect:/user/joinsuccess";
 	}

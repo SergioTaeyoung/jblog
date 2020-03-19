@@ -33,7 +33,7 @@
 	<select id="MinNo" parameterType="Long" resultType="Long">
 		
 				<![CDATA[
-				select min(no)
+				select max(no)
 				from post
 				where category_no = #{cateNo};
 				]]>

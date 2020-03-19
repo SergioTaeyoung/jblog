@@ -50,7 +50,14 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}${blogVo.logo}">
+				<c:choose>
+					<c:when test="${blogVo.logo=='1234.PNG' }">
+						<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					</c:when>					
+					<c:otherwise>
+						<img src="${pageContext.request.contextPath}${blogVo.logo}">					
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
