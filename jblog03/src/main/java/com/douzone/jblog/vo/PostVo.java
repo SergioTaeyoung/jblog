@@ -1,15 +1,15 @@
 package com.douzone.jblog.vo;
 
 public class PostVo {
-	private int no;
+	private Long no;
 	private String title;
 	private String contents;
 	private String dateTime;
-	private int categoryNo;
-	public int getNo() {
+	private Long categoryNo;
+	public Long getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(Long no) {
 		this.no = no;
 	}
 	public String getTitle() {
@@ -30,10 +30,10 @@ public class PostVo {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	public int getCategoryNo() {
+	public Long getCategoryNo() {
 		return categoryNo;
 	}
-	public void setCategoryNo(int categoryNo) {
+	public void setCategoryNo(Long categoryNo) {
 		this.categoryNo = categoryNo;
 	}
 	@Override

@@ -70,6 +70,10 @@ public class BlogService {
 		return postRepository.getPostList(firstCategoryNo);
 	}
 
+	public PostVo getPost(PostVo vo) {
+		return postRepository.getPost(vo);		
+	}
+
 
 	
 	

@@ -15,8 +15,19 @@
 				select no, title, contents, 
 				reg_date as 'dateTime', category_no as 'categoryNo' 
 				from post 
-				where category_no = #{firstCategoryNo };
+				where category_no = #{firstCategoryNo }
 				]]>
 	</select>
-	
+
+	<select id="post" parameterType="postvo" resultType="postvo">
+		
+				<![CDATA[
+				select no, title, contents, 
+				reg_date as 'dateTime', 
+				category_no as 'categoryNo'
+				from post
+				where no = #{no }				
+				]]>
+	</select>
+
 </mapper>

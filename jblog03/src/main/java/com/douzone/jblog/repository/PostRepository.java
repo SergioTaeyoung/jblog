@@ -22,4 +22,8 @@ public class PostRepository {
 		return sqlSession.selectList("post.list", firstCategoryNo);
 	}
 
+	public PostVo getPost(PostVo vo) {
+		return sqlSession.selectOne("post.post", vo);
+	}
+
 }

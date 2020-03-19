@@ -1,6 +1,7 @@
 package com.douzone.jblog.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,15 +22,34 @@ public class BlogController {
 
 	@Autowired
 	private BlogService blogService;
-
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String blog(@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model) {
+ // /id/categoryNo/postNo
+	@RequestMapping({"","/{pathNo1}","/{pathNo1}/{pathNo2}"})
+	public String blog(
+			@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model,
+			PostVo pVo,
+			@PathVariable Optional<Long> pathNo1,
+			@PathVariable Optional<Long> pathNo2) {
 		vo.setBlogId(id);
 		cVo.setId(id);
 		
-		//첫번째로 만들어진 카테고리 번호
+		Long postNo = 0L;
+		Long categoryNo = 0L;
+		
+		
+		
+		if( pathNo2.isPresent()) {
+	         postNo = pathNo2.get();
+	         categoryNo = pathNo1.get();
+	      } else if( pathNo1.isPresent() ){
+	    	  postNo = pathNo1.get();
+	    	  pVo.setNo(postNo);
+	  		  pVo = blogService.getPost(pVo);
+	  		  model.addAttribute("post", pVo);
+	      }
+
+		// 첫번째로 만들어진 카테고리 번호
 		int firstCategoryNo = blogService.getFirstCategoryNo(id);
-		//첫번째 포스트 리스트
+		// 첫번째 포스트 리스트
 		List<PostVo> pList = blogService.getPostList(firstCategoryNo);
 		model.addAttribute("pList", pList);
 
@@ -82,7 +102,7 @@ public class BlogController {
 	public String write2(@PathVariable("id") String id,
 			@RequestParam(value = "title", defaultValue = "true") String title,
 			@RequestParam(value = "content", defaultValue = "true") String contents,
-			@RequestParam(value = "category", required = true, defaultValue = "") int cateNo, CategoryVo cVo,
+			@RequestParam(value = "category", required = true, defaultValue = "") Long cateNo, CategoryVo cVo,
 			PostVo pVo, Model model) {
 
 		pVo.setTitle(title);
@@ -112,16 +132,16 @@ public class BlogController {
 	public String cateUpdate(@PathVariable("id") String id,
 			@RequestParam(value = "name", defaultValue = "true") String name,
 			@RequestParam(value = "desc", defaultValue = "true") String description, CategoryVo vo) {
-		if("기타".equals(name)) {
+		if ("기타".equals(name)) {
 			return "redirect:/{id}/category";
-		}else {
+		} else {
 			vo.setName(name);
 			vo.setDescription(description);
 			vo.setId(id);
-			blogService.cateInsert(vo);			
+			blogService.cateInsert(vo);
 		}
 
-			return "redirect:/{id}/category";
+		return "redirect:/{id}/category";
 	}
 
 }

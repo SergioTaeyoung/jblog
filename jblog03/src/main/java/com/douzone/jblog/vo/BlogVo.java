@@ -4,6 +4,7 @@ public class BlogVo {
 	private String blogId;
 	private String title;
 	private String logo;
+	
 	public String getBlogId() {
 		return blogId;
 	}
