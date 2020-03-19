@@ -11,7 +11,7 @@
 
 	<select id="myBlog" parameterType="blogvo" resultType="blogvo">
 		<![CDATA[
-			select id, title, logo
+			select id as blogId, title, logo
 			from blog 
 			where id = #{blogId } 			
 		]]>

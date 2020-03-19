@@ -17,7 +17,7 @@ import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
 
 @Controller
-@RequestMapping("/{id}")
+@RequestMapping("/{id:(?!assets).*}")
 public class BlogController {
 
 	@Autowired
@@ -27,9 +27,10 @@ public class BlogController {
 	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
 	public String blog(@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model, PostVo pVo,
 			@PathVariable Optional<Long> pathNo1, @PathVariable Optional<Long> pathNo2) {
+		
 		vo.setBlogId(id);
 		cVo.setId(id);
-
+		
 		Long postNo = 0L;
 		Long categoryNo = 0L;
 
@@ -47,12 +48,13 @@ public class BlogController {
 			List<PostVo> pList = blogService.getPostList(categoryNo);
 			model.addAttribute("pList", pList);
 
-			vo = blogService.getBlog(vo);
+			BlogVo blogVo = blogService.getBlog(vo);
 			List<CategoryVo> list = blogService.getCategory(cVo);
 
 			model.addAttribute("list", list);
-			model.addAttribute("title", vo.getTitle());
-			model.addAttribute("logo", vo.getLogo());
+//			model.addAttribute("title", vo.getTitle());
+//			model.addAttribute("logo", vo.getLogo());
+			model.addAttribute("blogVo", blogVo);
 
 		} else if (pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
@@ -66,12 +68,13 @@ public class BlogController {
 			List<PostVo> pList = blogService.getPostList(categoryNo);
 			model.addAttribute("pList", pList);
 
-			vo = blogService.getBlog(vo);
+			BlogVo blogVo = blogService.getBlog(vo);
 			List<CategoryVo> list = blogService.getCategory(cVo);
 
 			model.addAttribute("list", list);
-			model.addAttribute("title", vo.getTitle());
-			model.addAttribute("logo", vo.getLogo());
+//			model.addAttribute("title", vo.getTitle());
+//			model.addAttribute("logo", vo.getLogo());
+			model.addAttribute("blogVo", blogVo);
 
 		} else {
 
@@ -87,12 +90,13 @@ public class BlogController {
 			List<PostVo> pList = blogService.getPostList(firstCategoryNo);
 			model.addAttribute("pList", pList);
 
-			vo = blogService.getBlog(vo);
+			BlogVo blogVo = blogService.getBlog(vo);
 			List<CategoryVo> list = blogService.getCategory(cVo);
 
 			model.addAttribute("list", list);
-			model.addAttribute("title", vo.getTitle());
-			model.addAttribute("logo", vo.getLogo());
+//			model.addAttribute("title", vo.getTitle());
+//			model.addAttribute("logo", vo.getLogo());
+			model.addAttribute("blogVo", blogVo);
 		}
 		return "blog/blog-main";
 	}
