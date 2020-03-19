@@ -42,14 +42,13 @@
 					<c:set var='listcount' value = '${totalCount }'></c:set>
 					<c:forEach var="vo" varStatus="status" items="${npList }">
 					
-					<tr>
-						<%-- <td>${listcount }</td> --%>
+					<tr>						
 						<td>${listcount-status.index }</td>
 						<td>${vo.name }</td>
 						<td>${vo.numberOfPost }</td>
 						<td>${vo.description }</td>
 						<td>												
-							<a href="${pageContext.request.contextPath }/${authUser.id}/delete/${vo.no}" class="del">
+							<a href="${pageContext.request.contextPath }/${authUser.id}/delete/${vo.no}/${vo.name}" class="del">
 							<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">	</a>
 						</td>						
 					</tr>					
