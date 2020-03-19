@@ -23,67 +23,66 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 
-	 // /id/categoryNo/postNo
-		@RequestMapping({"","/{pathNo1}","/{pathNo1}/{pathNo2}"})
-		public String blog(
-				@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model,
-				PostVo pVo,
-				@PathVariable Optional<Long> pathNo1,
-				@PathVariable Optional<Long> pathNo2) {
-			vo.setBlogId(id);
-			cVo.setId(id);
-			
-			Long postNo = 0L;
-			Long categoryNo = 0L;
-			
-			
-			
-			if( pathNo2.isPresent()) {
-		         postNo = pathNo2.get();
-		         categoryNo = pathNo1.get();
-		         
-		         model.addAttribute("caNo",categoryNo);
-		    	  
-		    	  
-		    	  pVo.setNo(postNo);
-		  		  pVo = blogService.getPost(pVo);
-		  		  model.addAttribute("post", pVo);
-		  		  
-		  		List<PostVo> pList = blogService.getPostList(categoryNo);
-				model.addAttribute("pList", pList);
-				
-				vo = blogService.getBlog(vo);
-				List<CategoryVo> list = blogService.getCategory(cVo);
+	// /id/categoryNo/postNo
+	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
+	public String blog(@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model, PostVo pVo,
+			@PathVariable Optional<Long> pathNo1, @PathVariable Optional<Long> pathNo2) {
+		vo.setBlogId(id);
+		cVo.setId(id);
 
-				model.addAttribute("list", list);
-				model.addAttribute("title", vo.getTitle());
-				model.addAttribute("logo", vo.getLogo());
-		         
-		    } else if( pathNo1.isPresent() ){
-		    	  categoryNo = pathNo1.get();
-		    	  model.addAttribute("caNo",categoryNo);
-		    	  
-		    	  Long cateNo = blogService.getMinNo(categoryNo);
-		    	  pVo.setNo(cateNo);
-		  		  pVo = blogService.getPost(pVo);
-		  		  model.addAttribute("post", pVo);
-		  		  
-		  		List<PostVo> pList = blogService.getPostList(categoryNo);
-				model.addAttribute("pList", pList);
-				
-				vo = blogService.getBlog(vo);
-				List<CategoryVo> list = blogService.getCategory(cVo);
+		Long postNo = 0L;
+		Long categoryNo = 0L;
 
-				model.addAttribute("list", list);
-				model.addAttribute("title", vo.getTitle());
-				model.addAttribute("logo", vo.getLogo());
-		  		  
-		  		  
-		   
-		    }else {
+		if (pathNo2.isPresent()) {
+			Long firstCategoryNo = blogService.getFirstCategoryNo(id);
+			model.addAttribute("caNo", firstCategoryNo);
+
+			postNo = pathNo2.get();
+			categoryNo = pathNo1.get();
+
+			pVo.setNo(postNo);
+			pVo = blogService.getPost(pVo);
+			model.addAttribute("post", pVo);
+
+			List<PostVo> pList = blogService.getPostList(categoryNo);
+			model.addAttribute("pList", pList);
+
+			vo = blogService.getBlog(vo);
+			List<CategoryVo> list = blogService.getCategory(cVo);
+
+			model.addAttribute("list", list);
+			model.addAttribute("title", vo.getTitle());
+			model.addAttribute("logo", vo.getLogo());
+
+		} else if (pathNo1.isPresent()) {
+			categoryNo = pathNo1.get();
+			model.addAttribute("caNo", categoryNo);
+
+			Long cateNo = blogService.getMinNo(categoryNo);
+			pVo.setNo(cateNo);
+			pVo = blogService.getPost(pVo);
+			model.addAttribute("post", pVo);
+
+			List<PostVo> pList = blogService.getPostList(categoryNo);
+			model.addAttribute("pList", pList);
+
+			vo = blogService.getBlog(vo);
+			List<CategoryVo> list = blogService.getCategory(cVo);
+
+			model.addAttribute("list", list);
+			model.addAttribute("title", vo.getTitle());
+			model.addAttribute("logo", vo.getLogo());
+
+		} else {
 
 			// 첫번째로 만들어진 카테고리 번호
 			Long firstCategoryNo = blogService.getFirstCategoryNo(id);
+			model.addAttribute("caNo", firstCategoryNo);
+			Long cateNo = blogService.getMinNo(firstCategoryNo);
+			pVo.setNo(cateNo);
+			pVo = blogService.getPost(pVo);
+			model.addAttribute("post", pVo);
+			System.err.println(firstCategoryNo);
 			// 첫번째 포스트 리스트
 			List<PostVo> pList = blogService.getPostList(firstCategoryNo);
 			model.addAttribute("pList", pList);
@@ -94,9 +93,9 @@ public class BlogController {
 			model.addAttribute("list", list);
 			model.addAttribute("title", vo.getTitle());
 			model.addAttribute("logo", vo.getLogo());
-		    }
-			return "blog/blog-main";
 		}
+		return "blog/blog-main";
+	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
