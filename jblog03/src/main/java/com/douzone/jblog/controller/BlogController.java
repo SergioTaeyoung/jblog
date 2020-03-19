@@ -26,6 +26,9 @@ public class BlogController {
 	public String blog(@PathVariable("id") String id, BlogVo vo, CategoryVo cVo, Model model) {
 		vo.setBlogId(id);
 		cVo.setId(id);
+		
+		//첫번째로 만들어진 카테고리 번호
+		int firstCategoryNo = blogService.getFirstCategoryNo(id);
 
 		vo = blogService.getBlog(vo);
 		List<CategoryVo> list = blogService.getCategory(cVo);

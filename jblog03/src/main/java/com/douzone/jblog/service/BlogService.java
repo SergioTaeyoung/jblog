@@ -61,6 +61,12 @@ public class BlogService {
 	public void categoryDelete(int no) {
 		categoryRepository.categoryDelete(no);		
 	}
+
+	public int getFirstCategoryNo(String id) {
+		return categoryRepository.getFirstCategoryNo(id);		
+	}
+
+
 	
 	
 

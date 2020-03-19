@@ -53,4 +53,14 @@
 		]]>
 	</delete>
 	
+	<select id="firstCN" parameterType="String"
+		resultType="integer">
+		
+				<![CDATA[
+				select min(no)as 'first_category' 
+				from category
+				where id = #{id };				
+				]]>
+	</select>
+	
 </mapper>
