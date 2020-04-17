@@ -102,7 +102,9 @@ public class BlogController {
 //			model.addAttribute("title", vo.getTitle());
 //			model.addAttribute("logo", vo.getLogo());
 			model.addAttribute("blogVo", blogVo);
+			
 		}
+		
 		return "blog/blog-main";
 	}
 
@@ -111,23 +113,27 @@ public class BlogController {
 			@PathVariable("id") String id, 
 			BlogVo vo,
 			Model model) {
-		System.err.println("id==="+id);
-		vo.setBlogId(id);
-		BlogVo blogVo = blogService.getBlog(vo);
+		
+		vo.setBlogId(id);		
+		BlogVo blogVo = blogService.getBlog(vo);			
+		
 		model.addAttribute("blogVo", blogVo);
 		return "blog/blog-admin-basic";
 	}
 
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public String category(@PathVariable("id") String id, CategoryVo vo, Model model) {
+	public String category(@PathVariable("id") String id, BlogVo bVo, CategoryVo vo, Model model) {
 		vo.setId(id);
 
 		List<CategoryVo> npList = blogService.numberofPost(vo);
+		bVo.setBlogId(id);
+		BlogVo blogVo = blogService.getBlog(bVo);
+		model.addAttribute("blogVo", blogVo);
 
 		int total = blogService.getTotal(id);
 
 		model.addAttribute("totalCount", total);
-		model.addAttribute("npList", npList);
+		model.addAttribute("npList", npList);		
 
 		return "blog/blog-admin-category";
 	}
@@ -144,6 +150,9 @@ public class BlogController {
 		cVo.setId(id);
 		List<CategoryVo> list = blogService.getCategory(cVo);
 
+		vo.setBlogId(id);
+		BlogVo blogVo = blogService.getBlog(vo);
+		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("list", list);
 
 		return "blog/blog-admin-write";
@@ -193,6 +202,11 @@ public class BlogController {
 		}
 
 		return "redirect:/{id}/category";
+	}
+	
+	@RequestMapping(value = "/category-spa", method = RequestMethod.GET)
+	public String categorySpa(Model model) {
+		return "blog/blog-admin-category-spa";
 	}
 
 }

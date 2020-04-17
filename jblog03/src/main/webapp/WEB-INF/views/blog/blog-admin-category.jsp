@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${blogVo.title }</h1>
 			<ul>
 			<c:if test="${empty authUser }">
 				<li><a href="${pageContext.request.contextPath }/user/login">로그인</a></li>
@@ -28,6 +28,7 @@
 				<ul class="admin-menu">
 					<li><a href="${pageContext.request.contextPath }/${authUser.id }/admin">기본설정</a></li>
 					<li class="selected">카테고리</li>
+					<li><a href="${pageContext.request.contextPath }/${authUser.id }/category-spa">카테고리(spa)</a></li>
 					<li><a href="${pageContext.request.contextPath }/${authUser.id }/write">글작성</a></li>
 				</ul>
 		      	<table class="admin-cat">

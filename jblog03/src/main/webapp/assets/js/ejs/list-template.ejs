@@ -1,0 +1,17 @@
+<%
+	for(var i = 0; i < data.length; i++) {
+		var vo = data[i]; 
+%>
+<tr>
+	<td><%=data.length-i%></td>
+	<td><%=vo.name%></td>
+	<td><%=vo.numberOfPost%></td>
+	<td><%=vo.description%></td>
+	<td><a href="${pageContext.request.contextPath }/${authUser.id}/delete/${vo.no}/${vo.name}"
+	class="del">
+	<img src="${pageContext.request.contextPath}/assets/images/delete.png"></a>
+	</td>
+</tr>
+<%
+	}
+%>
