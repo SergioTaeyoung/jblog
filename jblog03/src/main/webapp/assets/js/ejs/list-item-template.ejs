@@ -1,6 +1,8 @@
-<li data-no='<%=no%>'> 
-	<strong><%=name%></strong> 
-	<p><%=contents.replace(/\n/gi, "<br/>")%></p> 
-	<strong></strong> 
-	<a href='' data-no='<%=no%>'>삭제</a>
-</li>
+<tr>
+	<td><%=len%></td>
+	<td><%=name%></td>
+	<td>0</td>
+	<td><%=description%></td>
+	<td><button id='cat-del' value='<%=no%>'><img src="<%=image%>"></button>
+	</td>
+</tr>

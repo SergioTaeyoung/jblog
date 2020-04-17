@@ -77,6 +77,48 @@ $(document).on("click","#cat-del",function(){
 	
 	
 });
+
+$(document).on("click","#add-cate",function(){	
+	var title = $('#title').val();
+	var desc = $('#desc').val();
+	
+	var vo = {};
+	vo.name = $('#title').val();
+	vo.description = $('#desc').val();
+	vo.id = '${authUser.id}';
+	console.log(title + desc);
+	console.log(vo.name + vo.description + vo.id);
+	$.ajax({
+		url: '${pageContext.request.contextPath }/api/category/add',
+		async: true,
+		type: 'post',
+		dataType: 'json',
+		contentType: 'application/json',
+		data: JSON.stringify(vo),
+		success: function(response){
+			
+			var image = "${pageContext.request.contextPath}/assets/images/delete.jpg";
+	    	response.data.image = image;
+	    	
+			if(response.result != "success"){
+				console.error(response.message);
+				return;
+			}
+			response.data.len= $('.admin-cat').find('tr').length;
+			console.log(response);
+			// rendering
+			// render(response.data, true);
+			var html = listItemTemplate.render(response.data);
+			$('.admin-cat tr').last().after(html);
+			console.log("last!!!");
+			
+		},
+		error: function(xhr, status, e){
+			console.error(status + ":" + e);
+		}
+	});
+});
+
 </script>
 </head>
 <body>
@@ -112,25 +154,26 @@ $(document).on("click","#cat-del",function(){
 						<th>카테고리명</th>
 						<th>포스트 수</th>
 						<th>설명</th>
-						<th>삭제</th>
+						<th>삭제</th>	
+						
 					</tr>
+					
+													
 				</table>
-				<form
-					action="${pageContext.request.contextPath }/${authUser.id }/cateupdate"
-					method="post">
+				<form>					
 					<h4 class="n-c">새로운 카테고리 추가</h4>
 					<table id="admin-cat-add">
 						<tr>
 							<td class="t">카테고리명</td>
-							<td><input type="text" name="name"></td>
+							<td><input type="text" name="title" id='title'></td>
 						</tr>
 						<tr>
 							<td class="t">설명</td>
-							<td><input type="text" name="desc"></td>
+							<td><input type="text" name="desc" id='desc' id="des-text"></td>
 						</tr>
 						<tr>
 							<td class="s">&nbsp;</td>
-							<td><input type="submit" value="카테고리 추가"></td>
+							<td><input id='add-cate' type="button" value="카테고리 추가"></td>
 						</tr>
 					</table>
 				</form>
