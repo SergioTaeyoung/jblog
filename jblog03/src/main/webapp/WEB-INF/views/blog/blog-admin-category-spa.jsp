@@ -27,8 +27,9 @@ var listTemplate = new EJS({
 });
 
 console.log(id);
-$(document).ready(function() {
 
+$(document).ready(function() {
+	
 	$.ajax({
 	    url: '${pageContext.request.contextPath }/api/category/' + id,
 	    async: true,
@@ -37,6 +38,10 @@ $(document).ready(function() {
 	    data: "",
 	    success: function(response){
 	    	console.log("ㅎㅇ");
+	    	
+	    	var image = "${pageContext.request.contextPath}/assets/images/delete.jpg";
+	    	response.data.image = image;
+	    	console.log(response.data);
 			var html = listTemplate.render(response);
 			$(".admin-cat").append(html);
 	    },
@@ -46,25 +51,32 @@ $(document).ready(function() {
 	  });
 });
 
-val delete = function(){
+$(document).on("click","#cat-del",function(){
+	var no = ($(this).val());
 	
+	console.log(no);
 	$.ajax({
-	    url: '${pageContext.request.contextPath }/api/category/' + id,
+	    url: '${pageContext.request.contextPath }/api/category/delete/' + no,
 	    async: true,
-	    type: 'get',	    
+	    type: 'delete',	    
 	    dataType: 'json',
-	    data: "",
-	    success: function(response){
-	    	console.log("ㅎㅇ");
-			var html = listTemplate.render(response);
-			$(".admin-cat").append(html);
+	    data: '',
+	    success: function(response){	    	
+			console.log("성공~!");
+		if(response.data != -1){
+				console.log(response.data);
+				 $(".admin-cat tr[data-no=" + response.data + "]").remove(); 
+				
+				return;
+			}
 	    },
 
 	    error: function (request, status, error){   
 	    }
 	  });
 	
-}
+	
+});
 </script>
 </head>
 <body>
@@ -95,13 +107,13 @@ val delete = function(){
 						href="${pageContext.request.contextPath }/${authUser.id }/write">글작성</a></li>
 				</ul>
 				<table class="admin-cat">
-				 	<tr>
+					<tr>
 						<th>번호</th>
 						<th>카테고리명</th>
 						<th>포스트 수</th>
 						<th>설명</th>
 						<th>삭제</th>
-					</tr> 
+					</tr>
 				</table>
 				<form
 					action="${pageContext.request.contextPath }/${authUser.id }/cateupdate"
