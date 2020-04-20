@@ -25,10 +25,14 @@ var listItemTemplate = new EJS({
 var listTemplate = new EJS({
 	url: "${pageContext.request.contextPath }/assets/js/ejs/list-template.ejs"
 });
+var number = "번호";
+var category = "카테고리명";
+var post = "포스트 수";
+var des = "설명";
+var del = "삭제";
 
 console.log(id);
-
-$(document).ready(function() {
+var getList = function() {
 	
 	$.ajax({
 	    url: '${pageContext.request.contextPath }/api/category/' + id,
@@ -42,6 +46,7 @@ $(document).ready(function() {
 	    	var image = "${pageContext.request.contextPath}/assets/images/delete.jpg";
 	    	response.data.image = image;
 	    	console.log(response.data);
+	    	
 			var html = listTemplate.render(response);
 			$(".admin-cat").append(html);
 	    },
@@ -49,12 +54,12 @@ $(document).ready(function() {
 	    error: function (request, status, error){   
 	    }
 	  });
-});
+};
+$(document).ready(getList());
 
 $(document).on("click","#cat-del",function(){
 	var no = ($(this).val());
-	
-	console.log(no);
+
 	$.ajax({
 	    url: '${pageContext.request.contextPath }/api/category/delete/' + no,
 	    async: true,
@@ -64,9 +69,11 @@ $(document).on("click","#cat-del",function(){
 	    success: function(response){	    	
 			console.log("성공~!");
 		if(response.data != -1){
-				console.log(response.data);
+				console.log(response.data + "리스폰스데이터");
 				 $(".admin-cat tr[data-no=" + response.data + "]").remove(); 
-				
+				 $('.admin-cat *').remove();
+				 getList();
+				console.log("as실행");
 				return;
 			}
 	    },
@@ -78,9 +85,11 @@ $(document).on("click","#cat-del",function(){
 	
 });
 
-$(document).on("click","#add-cate",function(){	
+$(document).on("click","#add-cate",function(e){
+	event.preev
 	var title = $('#title').val();
 	var desc = $('#desc').val();
+	
 	
 	var vo = {};
 	vo.name = $('#title').val();
@@ -109,8 +118,11 @@ $(document).on("click","#add-cate",function(){
 			// rendering
 			// render(response.data, true);
 			var html = listItemTemplate.render(response.data);
+			// $('.admin-cat *').remove();
+			// getList();
 			$('.admin-cat tr').last().after(html);
-			console.log("last!!!");
+			$("#add-form")[0].reset();
+			e.preventDefault();
 			
 		},
 		error: function(xhr, status, e){
@@ -124,7 +136,7 @@ $(document).on("click","#add-cate",function(){
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${blogVo.title }</h1>
+			<h1>${bVo.title }</h1>
 			<ul>
 				<c:if test="${empty authUser }">
 					<li><a href="${pageContext.request.contextPath }/user/login">로그인</a></li>
@@ -149,18 +161,11 @@ $(document).on("click","#add-cate",function(){
 						href="${pageContext.request.contextPath }/${authUser.id }/write">글작성</a></li>
 				</ul>
 				<table class="admin-cat">
-					<tr>
-						<th>번호</th>
-						<th>카테고리명</th>
-						<th>포스트 수</th>
-						<th>설명</th>
-						<th>삭제</th>	
-						
-					</tr>
+
 					
 													
 				</table>
-				<form>					
+				<form id="add-form">					
 					<h4 class="n-c">새로운 카테고리 추가</h4>
 					<table id="admin-cat-add">
 						<tr>

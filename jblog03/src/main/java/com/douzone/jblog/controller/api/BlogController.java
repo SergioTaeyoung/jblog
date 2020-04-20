@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.dto.JsonResult;
+import com.douzone.jblog.service.BlogService;
+import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 
 
@@ -26,10 +26,14 @@ public class BlogController {
 	private BlogService blogService;
 
 	@GetMapping("/{id}")
-	public JsonResult list(@PathVariable("id") String id, CategoryVo vo) {
+	public JsonResult list(@PathVariable("id") String id, CategoryVo vo, BlogVo bVo) {
 		vo.setId(id);
+		bVo.setBlogId(id);
 		// List<CategoryVo> list = blogService.getCategory(vo);
 		List<CategoryVo> npList = blogService.numberofPost(vo);
+		bVo = blogService.getBlog(bVo);
+		String title = bVo.getTitle();
+		JsonResult.success(title);		
 
 		return JsonResult.success(npList);
 	}
@@ -45,6 +49,7 @@ public class BlogController {
 		System.err.println("여까지 왔나?");
 		System.out.println(vo);
 		blogService.cateInsert(vo);		
+		blogService.numberofPost(vo);
 		return JsonResult.success(vo);
 	}
 
