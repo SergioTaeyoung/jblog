@@ -9,7 +9,7 @@
 		]]>
 	</insert>
 
-	<select id="list" parameterType="long" resultType="postvo">
+	<select id="list" parameterType="Long" resultType="postvo">
 		
 				<![CDATA[
 				select no, title, contents, 
@@ -30,7 +30,7 @@
 				]]>
 	</select>
 
-	<select id="MinNo" parameterType="long" resultType="long">
+	<select id="MinNo" parameterType="Long" resultType="Long">
 		
 				<![CDATA[
 				select max(no)

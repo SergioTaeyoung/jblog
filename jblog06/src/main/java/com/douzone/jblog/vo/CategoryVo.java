@@ -1,7 +1,7 @@
 package com.douzone.jblog.vo;
 
 public class CategoryVo {
-	private int no;
+	private long no;
 	private String name;
 	private String description;
 	private String dateTime;
@@ -14,10 +14,10 @@ public class CategoryVo {
 	public void setNumberOfPost(int numberOfPost) {
 		this.numberOfPost = numberOfPost;
 	}
-	public int getNo() {
+	public long getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(long no) {
 		this.no = no;
 	}
 	public String getName() {

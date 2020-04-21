@@ -15,6 +15,9 @@
 			insert into category
 			values(null, #{name },#{description },now(),#{id } )
 		]]>
+		<selectKey keyProperty = "no" resultType="int" order="AFTER">
+            select last_insert_id()
+         </selectKey>
 	</insert>
 
 	<select id="total" parameterType="String"
@@ -39,9 +42,9 @@
  	<select id="getNP" parameterType="categoryvo" resultType="categoryvo">
 		
 				<![CDATA[
-				select a.no,a.name,a.description,a.reg_date,a.id,count(b.category_no) as numberOfPost 
-         		from category a left outer join post b on a.no=b.category_no 
-         		where id=#{id}
+				select a.no,a.name,a.description,a.reg_date,a.id,count(b.category_no) as numberOfPost, c.title 
+         		from blog c, category a left outer join post b on a.no=b.category_no 
+         		where a.id=#{id}
          		group by a.no;				
 				]]>
 	</select> 
@@ -53,7 +56,9 @@
 		]]>
 	</delete>
 	
-	<select id="firstCN" parameterType="string" resultType="long">
+	<select id="firstCN" parameterType="String"
+		resultType="long">
+		
 				<![CDATA[
 				select min(no)as 'first_category' 
 				from category
