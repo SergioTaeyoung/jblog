@@ -31,6 +31,7 @@ var post = "포스트 수";
 var des = "설명";
 var del = "삭제";
 
+
 console.log(id);
 var getList = function() {
 	
@@ -40,8 +41,7 @@ var getList = function() {
 	    type: 'get',	    
 	    dataType: 'json',
 	    data: "",
-	    success: function(response){
-	    	console.log("ㅎㅇ");
+	    success: function(response){	    	
 	    	
 	    	var image = "${pageContext.request.contextPath}/assets/images/delete.jpg";
 	    	response.data.image = image;
@@ -136,7 +136,7 @@ $(document).on("click","#add-cate",function(e){
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${bVo.title }</h1>
+			<h1>${blogVo.title }</h1>
 			<ul>
 				<c:if test="${empty authUser }">
 					<li><a href="${pageContext.request.contextPath }/user/login">로그인</a></li>

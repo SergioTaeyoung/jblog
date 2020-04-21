@@ -205,7 +205,10 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/category-spa", method = RequestMethod.GET)
-	public String categorySpa(Model model) {
+	public String categorySpa(@PathVariable("id") String id, Model model, BlogVo vo) {
+		vo.setBlogId(id);
+		BlogVo blogVo = blogService.getBlog(vo);
+		model.addAttribute("blogVo", blogVo);
 		return "blog/blog-admin-category-spa";
 	}
 

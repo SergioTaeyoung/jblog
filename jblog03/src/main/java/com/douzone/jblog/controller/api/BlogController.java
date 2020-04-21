@@ -31,10 +31,8 @@ public class BlogController {
 		bVo.setBlogId(id);
 		// List<CategoryVo> list = blogService.getCategory(vo);
 		List<CategoryVo> npList = blogService.numberofPost(vo);
-		bVo = blogService.getBlog(bVo);
-		String title = bVo.getTitle();
-		JsonResult.success(title);		
-
+		System.err.println(npList);
+		
 		return JsonResult.success(npList);
 	}
 
