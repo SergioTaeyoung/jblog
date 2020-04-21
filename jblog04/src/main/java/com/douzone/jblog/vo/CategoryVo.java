@@ -7,7 +7,14 @@ public class CategoryVo {
 	private String dateTime;
 	private String id;
 	private int numberOfPost;
+	private String title;
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getNumberOfPost() {
 		return numberOfPost;
 	}
@@ -47,7 +54,7 @@ public class CategoryVo {
 	@Override
 	public String toString() {
 		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", dateTime=" + dateTime
-				+ ", id=" + id + ", numberOfPost=" + numberOfPost + "]";
+				+ ", id=" + id + ", numberOfPost=" + numberOfPost + ", title =" + title + "]";
 	}
 
 

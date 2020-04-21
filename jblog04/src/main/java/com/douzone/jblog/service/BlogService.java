@@ -58,8 +58,9 @@ public class BlogService {
 		return categoryRepository.getNumberOfPost(vo);
 	}
 
-	public void categoryDelete(int no) {
-		categoryRepository.categoryDelete(no);		
+	public boolean categoryDelete(int no) {
+		return 1 == categoryRepository.categoryDelete(no);		
+		
 	}
 
 	public Long getFirstCategoryNo(String id) {

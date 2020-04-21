@@ -1,0 +1,30 @@
+<tr>
+	<th><%=number%></th>
+	<th><%=category%></th>
+	<th><%=post%></th>
+	<th><%=des%></th>
+	<th><%=del%></th>	
+</tr>
+
+<%
+	for(var i = 0; i < data.length; i++) {
+		var vo = data[i]; 
+%>
+
+
+<tr id='aaa' data-no='<%=vo.no%>'>
+	<td><%=i+1%></td>
+	<td><%=vo.name%></td>
+	<td><%=vo.numberOfPost%></td>
+	<td><%=vo.description%></td>
+	<% if(vo.numberOfPost == 0){%>	
+	<td><button id='cat-del' value='<%=vo.no%>'><img src="<%=data.image%>"></button></td>
+	<% } else {%>
+	<td></td>
+	<% } %>
+</tr>
+
+<%
+	}
+%>
+
